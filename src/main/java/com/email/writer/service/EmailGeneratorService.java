@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -62,19 +63,24 @@ public class EmailGeneratorService {
                     .path("text")
                     .asText();
         } catch (Exception e) {
-            return "Error processing request: " + e.getMessage();
+            e.printStackTrace();
+//            return "Error processing request: " + e.getMessage();
         }
+        return null;
     }
 
     private String buildPrompt(EmailRequest emailRequest) {
         StringBuilder prompt = new StringBuilder();
-        prompt.append("Generate a professional email reply for the following email content.");
-        prompt.append("Please don't generate a subject line or header ");
+        prompt.append("You are a professional email generator");
+        prompt.append("Generate only email content as reply to the message below");
+        prompt.append("Do not include subject line, header or any explanations in the response");
+        prompt.append("output the reply content only");
 
         if (emailRequest.getTone() != null && !emailRequest.getTone().isEmpty()) {
-            prompt.append("Use a ").append(emailRequest.getTone()).append("tone");
+            prompt.append("Use a ").append(emailRequest.getTone()).append("tone.");
         }
-        prompt.append("\nOriginal email: \n").append(emailRequest.getEmailContent());
-        return null;
+        prompt.append("\nOriginal email: \n").append(emailRequest.getContent());
+        prompt.append("\nYour reply:");
+        return prompt.toString();
     }
 }
