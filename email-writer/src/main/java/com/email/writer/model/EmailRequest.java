@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class EmailRequest {
     private String content;
-
     private String tone;
 
     @Override
