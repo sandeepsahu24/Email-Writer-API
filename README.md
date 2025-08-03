@@ -7,7 +7,7 @@ This project is organized into three main parts: the backend service, the fronte
 The backend service is built with **Java Spring Boot** and provides the API endpoint for generating AI-based email replies. The backend is responsible for processing the requests and communicating with the Gemini API to generate email responses based on the provided content and tone.
 
 - **`EmailController.java`**: This file exposes the API endpoint `/api/mail/generate` that accepts POST requests with the email content and tone. It delegates the actual generation process to the service layer.
-- **`EmailBody.java`**: This class models the request body, containing two fields: `emailContent` (the original email message) and `tone` (the desired tone of the generated reply).
+- **`EmailRequest.java`**: This class models the request body, containing two fields: `content` (the original email message) and `tone` (the desired tone of the generated reply).
 - **`EmailGeneratorService.java`**: This service constructs a prompt using the provided email content and tone, and then sends the request to the Gemini API. The response is extracted and returned to the client.
 - **`application.properties`**: This file contains configuration properties like the API key and the URI for the Gemini API.
 
